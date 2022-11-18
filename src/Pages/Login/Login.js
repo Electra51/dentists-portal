@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { login } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
     const handleLogin = (data) => {
-        console.log(data)
+        console.log(data);
+        setLoginError('');
+        login(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(err => {
+                console.log(err.message);
+                setLoginError(err.message);
+            });
     }
     return (
         <div className='h-[600px] flex justify-center items-center'>
@@ -32,6 +45,7 @@ const Login = () => {
                         )}
                             className="input input-bordered " />
                         {errors.password && <p className='text-red-600 text-left' role="alert">{errors.password?.message}</p>}
+                        {loginError && <p className='text-red-600 text-left'>{loginError}</p>}
                     </div>
 
                     <label className="label">
