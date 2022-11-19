@@ -43,7 +43,7 @@ const BookingModal = ({ treatments, selectedDate, setTreatments }) => {
 
               {
                 slots.map((slot, i) => <option value={slot}
-                  key={i}>{slot}</option>)
+                key={i}>{slot}</option>)
               }
             </select>
             <input name="text" type="name" placeholder="Your Name" className="input w-full input-bordered" />

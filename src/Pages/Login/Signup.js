@@ -1,20 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { AiOutlineEye } from 'react-icons/ai';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [signUpError, setSignUpError] = useState('');
     const handleSignUp = (data) => {
-        console.log(data)
+        console.log(data);
+        setSignUpError('')
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast('User Created Successfully!')
+                const userInfo = {
+                    displayName:data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                .catch(err=>console.error(err))
             })
-            .catch(err => console.error(err));
+            .catch(error => {
+                setSignUpError(error.message)
+                console.error(error)
+            });
     }
     return (
         <div className='h-[600px] flex justify-center items-center'>
@@ -52,6 +65,7 @@ const Signup = () => {
                         {errors.password && <p className='text-red-600 text-left' role="alert">{errors.password?.message}</p>}
                     </div>
                     <input className='btn btn-primary w-full mt-5' type="submit" value='Sign Up' />
+                    {signUpError && <p className='text-red-600'> {signUpError}</p> }
                     <p>Already have an account? please <Link to='/login' className='text-primary font-semibold'>Log In</Link> </p>
                     <div className="divider">OR</div>
                     <button className='btn btn-outline btn-primary w-full'>Continue with Google</button>
