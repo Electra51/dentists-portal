@@ -6,17 +6,21 @@ import InfoCards from "./InfoCards";
 import MakeAppointment from "./MakeAppointment";
 import Services from "./Services";
 import Testimonial from "./Testimonial";
+import FAQAccordion from "./FAQAccordion";
+import DentalGallery from "./DentalGallery";
 
 const Home = () => {
   return (
     <div>
       <Banner />
-      {/* <InfoCards /> */}
-      {/* <Services />
+      <InfoCards />
+      <Services />
       <About />
       <MakeAppointment />
-      <Testimonial /> */}
-      {/* <Contact /> */}
+      <Testimonial />
+      <Contact />
+      <FAQAccordion />
+      <DentalGallery />
     </div>
   );
 };

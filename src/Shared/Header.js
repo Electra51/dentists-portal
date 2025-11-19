@@ -1,101 +1,3 @@
-// import React, { useContext } from "react";
-// import { Link } from "react-router-dom";
-// import { AuthContext } from "../Contexts/AuthProvider";
-// import Lottie from "lottie-react";
-// import teeth from "../teeth.json";
-
-// const Header = () => {
-//   const { user, logOut } = useContext(AuthContext);
-
-//   const handleLogOut = () => {
-//     logOut()
-//       .then(() => {})
-//       .catch((err) => console.log(err));
-//   };
-//   const menuItems = (
-//     <React.Fragment>
-//       <li>
-//         <Link to="/">Home</Link>
-//       </li>
-//       <li>
-//         <Link to="/appointment">Appointment</Link>
-//       </li>
-//       <li>
-//         <Link to="/about">About</Link>
-//       </li>
-//       {user?.uid ? (
-//         <>
-//           <li>
-//             <Link to="/dashboard">Dashboard</Link>
-//           </li>
-//           <li>
-//             <button onClick={handleLogOut}>Sign out</button>
-//           </li>
-//         </>
-//       ) : (
-//         <li>
-//           <Link to="/login">Login</Link>
-//         </li>
-//       )}
-//     </React.Fragment>
-//   );
-//   return (
-//     <div className="navbar bg-base-100 flex justify-between">
-//       <div className="navbar-start">
-//         <div className="dropdown">
-//           <label tabIndex={0} className="btn btn-ghost lg:hidden">
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-5 w-5"
-//               fill="none"
-//               viewBox="0 0 24 24"
-//               stroke="currentColor">
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="2"
-//                 d="M4 6h16M4 12h8m-8 6h16"
-//               />
-//             </svg>
-//           </label>
-//           <ul
-//             tabIndex={1}
-//             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-//             {menuItems}
-//           </ul>
-//         </div>
-
-//         <Link to="/" className="btn btn-ghost normal-case text-xl font-bold">
-//           <Lottie animationData={teeth} loop={true} className="w-10 h-10" />{" "}
-//           Dentist-portal
-//         </Link>
-//       </div>
-//       <div className="navbar-center hidden lg:flex">
-//         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
-//       </div>
-//       <label
-//         htmlFor="dashboard-drawer"
-//         tabIndex={2}
-//         className="btn btn-ghost lg:hidden">
-//         <svg
-//           xmlns="http://www.w3.org/2000/svg"
-//           className="h-5 w-5"
-//           fill="none"
-//           viewBox="0 0 24 24"
-//           stroke="currentColor">
-//           <path
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//             strokeWidth="2"
-//             d="M4 6h16M4 12h8m-8 6h16"
-//           />
-//         </svg>
-//       </label>
-//     </div>
-//   );
-// };
-
-// export default Header;
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
@@ -111,15 +13,9 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -149,11 +45,8 @@ const Header = () => {
           </button>
         </>
       ) : (
-        <Link to="/login">
-          {/* className="nav-link btn-info px-3 py-1.5 rounded-md text-white flex
-          justify-center gap-1" */}
+        <Link to="/login" className="w-full lg:w-auto">
           <PrimaryButton>
-            {" "}
             <LogIn className="w-5" />
             <span className="pl-2">Login</span>
           </PrimaryButton>
@@ -169,7 +62,7 @@ const Header = () => {
           ? "bg-white border-b border-gray-200 shadow-sm"
           : "bg-base/30 backdrop-blur-md"
       }`}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 lg:px-0 py-1.5">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center font-semibold text-lg">
             <Lottie animationData={teeth} loop={true} className="w-10 h-10" />
@@ -196,11 +89,12 @@ const Header = () => {
           </button>
         </div>
 
-        {open && (
-          <div className="lg:hidden flex flex-col gap-4 pb-4 mt-2 animate-fadeIn">
-            {menuItems}
-          </div>
-        )}
+        <div
+          className={`lg:hidden transition-all duration-300 overflow-hidden ${
+            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}>
+          <div className="flex flex-col gap-4 pb-4 pt-2">{menuItems}</div>
+        </div>
       </div>
 
       <style>
