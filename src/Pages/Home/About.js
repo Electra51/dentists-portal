@@ -2,6 +2,7 @@ import React from "react";
 import treatment from "../../assets/images/treatment.png";
 import PrimaryButton from "../../Components/PrimaryButton";
 import { Check, Award, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FeatureItem = ({ icon: Icon, text }) => (
   <div className="flex items-center gap-3 group">
@@ -78,7 +79,9 @@ const About = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <PrimaryButton>Learn More</PrimaryButton>
+              <Link to={"/about"}>
+                <PrimaryButton>Learn More</PrimaryButton>
+              </Link>
               <PrimaryButton variant="outline">Book Appointment</PrimaryButton>
             </div>
           </div>

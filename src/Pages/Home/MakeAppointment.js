@@ -650,7 +650,7 @@ const MakeAppointment = () => {
             <img
               src={doctor}
               alt="doctor"
-              className="-mt-32 hidden lg:block lg:w-1/2 lg:h-[70vh]"
+              className="-mt-32 hidden lg:block lg:w-1/2 lg:h-[80vh]"
             />
             <div className="p-12">
               <div className="text-white">

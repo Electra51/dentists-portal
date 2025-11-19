@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Star, Quote, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import PrimaryButton from "../../Components/PrimaryButton";
 
 const TestimonialCard = ({ review, isActive }) => {
   return (
@@ -188,9 +190,13 @@ const Testimonial = () => {
             Join hundreds of satisfied patients who trust us with their dental
             health.
           </p>
-          <button className="px-8 py-4 bg-white text-primary font-semibold rounded-xl hover:bg-gray-50 hover:shadow-xl transition-all">
-            Book Your Appointment
-          </button>
+          <Link to={"/appointment"}>
+            <PrimaryButton
+              variant="outline"
+              className=" border border-white bg-white">
+              Book Appointment
+            </PrimaryButton>
+          </Link>
         </div>
       </div>
     </section>

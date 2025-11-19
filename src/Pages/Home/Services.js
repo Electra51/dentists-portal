@@ -31,9 +31,11 @@ const Services = () => {
   return (
     <div className="max-w-7xl mx-auto rounded-md p-6 mt-32">
       <div className="text-center">
-        <p className="inline-block text-primary text-lg font-bold rounded-full mb-2 uppercase tracking-wider">
-          OUR SERVICES
-        </p>
+        <div className="inline-block mb-4">
+          <span className="px-4 py-2 bg-primary/10 text-primary text-sm font-bold rounded-full uppercase tracking-wider">
+            Our Services
+          </span>
+        </div>
         <h2 className="text-4xl md:text-[43px] font-bold text-accent mb-1.5">
           Services We Provide
         </h2>

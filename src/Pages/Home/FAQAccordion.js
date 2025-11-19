@@ -4,7 +4,12 @@ import PrimaryButton from "../../Components/PrimaryButton";
 
 const FAQAccordion = () => {
   const [openIndex, setOpenIndex] = useState(null);
-
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
   const faqs = [
     {
       question: "What services do you offer?",
@@ -45,7 +50,6 @@ const FAQAccordion = () => {
   return (
     <div className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-3">
             Frequently Asked Questions
@@ -55,13 +59,11 @@ const FAQAccordion = () => {
           </p>
         </div>
 
-        {/* FAQ Items */}
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
-              {/* Question Button */}
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex items-center justify-between p-6 text-left transition-colors duration-200 hover:bg-gray-50">
@@ -75,7 +77,6 @@ const FAQAccordion = () => {
                 />
               </button>
 
-              {/* Answer */}
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
                   openIndex === index
@@ -92,10 +93,10 @@ const FAQAccordion = () => {
           ))}
         </div>
 
-        {/* Call to Action */}
         <div className="mt-12 text-center">
           <p className="text-gray-600 mb-4">Still have questions?</p>
-          <PrimaryButton>Contact Us</PrimaryButton>
+
+          <PrimaryButton onClick={scrollToContact}>Contact Us</PrimaryButton>
         </div>
       </div>
     </div>

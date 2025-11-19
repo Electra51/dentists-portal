@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import PrimaryButton from "../../Components/PrimaryButton";
+import { Link } from "react-router-dom";
 
 const DentalGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -38,7 +39,7 @@ const DentalGallery = () => {
     },
     {
       id: 6,
-      url: "https://images.unsplash.com/photo-1609840114035-3c981960afbb?w=800&h=600&fit=crop",
+      url: "https://plus.unsplash.com/premium_photo-1682130157004-057c137d96d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2FpdGluZyUyMHJvb218ZW58MHx8MHx8fDA%3D",
       title: "Waiting Lounge",
       category: "Facility",
     },
@@ -50,7 +51,7 @@ const DentalGallery = () => {
     },
     {
       id: 8,
-      url: "https://images.unsplash.com/photo-1632053003552-e7b39c1c3e1f?w=800&h=600&fit=crop",
+      url: "https://plus.unsplash.com/premium_photo-1661775601929-8c775187bea6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8UGF0aWVudCUyMENhcmV8ZW58MHx8MHx8fDA%3D",
       title: "Patient Care",
       category: "Services",
     },
@@ -179,7 +180,9 @@ const DentalGallery = () => {
           <p className="text-gray-600 mb-4 text-lg">
             Want to visit us in person?
           </p>
-          <PrimaryButton>Schedule a Visit</PrimaryButton>
+          <Link to={"/appointment"}>
+            <PrimaryButton>Schedule a Visit</PrimaryButton>
+          </Link>
         </div>
       </div>
     </div>

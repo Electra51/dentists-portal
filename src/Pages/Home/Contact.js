@@ -20,7 +20,8 @@ const Contact = () => {
   };
 
   return (
-    <div
+    <section
+      id="contact"
       className="hero mt-20 max-w-7xl mx-auto rounded-md bg-cover bg-center bg-no-repeat"
       style={{ background: `url(${contact})` }}>
       <div className="w-full h-full bg-blue/30 rounded-md">
@@ -77,7 +78,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
