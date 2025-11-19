@@ -25,7 +25,7 @@
 
 import React from "react";
 import { Calendar, Clock, Phone, CheckCircle, ArrowRight } from "lucide-react";
-
+import appointmentBg from "../../assets/images/appointment.png";
 const AppointmentFeature = ({ icon: Icon, title, description }) => (
   <div className="flex items-start gap-4 group">
     <div className="flex-shrink-0 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300 border border-white/20">
@@ -60,13 +60,14 @@ const MakeAppointment = () => {
   return (
     <section className="relative py-20 px-4 my-20 overflow-hidden">
       {/* Background with overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/90">
-        <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 ">
+        <div className="absolute inset-0 opacity-90">
           <div
             className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}></div>
+            // style={{
+            //   backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            // }}
+            style={{ background: `url(${appointmentBg})` }}></div>
         </div>
       </div>
 

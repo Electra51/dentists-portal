@@ -121,19 +121,17 @@ const InfoCards = () => {
       bgClass: "bg-gradient-to-r from-blue-500 to-purple-500",
     },
   ];
-
+  // -mt-20 relative z-10
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
-      {/* Section with cards */}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {cardData.map((card) => (
           <InfoCard key={card.id} card={card} />
         ))}
       </div>
 
-      {/* Optional: Decorative line */}
       <div className="mt-16 flex items-center justify-center">
-        <div className="h-1 w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent rounded-full"></div>
+        {/* <div className="h-1 w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent rounded-full"></div> */}
       </div>
     </div>
   );

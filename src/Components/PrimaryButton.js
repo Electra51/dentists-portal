@@ -14,7 +14,7 @@ import React from "react";
 
 const PrimaryButton = ({ children, variant = "solid" }) => {
   const baseClasses =
-    "btn btn-primary px-6 py-3 rounded-lg font-semibold transition-all duration-300";
+    "btn btn-primary px-6 py-2.5 rounded-lg font-semibold transition-all duration-300";
 
   const variants = {
     solid:

@@ -96,16 +96,32 @@
 // };
 
 // export default Header;
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 import Lottie from "lottie-react";
 import teeth from "../teeth.json";
 import { LogIn } from "lucide-react";
+import PrimaryButton from "../Components/PrimaryButton";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleLogOut = () => {
     logOut().catch((err) => console.log(err));
@@ -133,34 +149,37 @@ const Header = () => {
           </button>
         </>
       ) : (
-        <Link
-          to="/login"
-          className="nav-link btn-info px-3 py-1.5 rounded-md text-white flex justify-center gap-1">
-          <LogIn className="w-4" />
-          Login
+        <Link to="/login">
+          {/* className="nav-link btn-info px-3 py-1.5 rounded-md text-white flex
+          justify-center gap-1" */}
+          <PrimaryButton>
+            {" "}
+            <LogIn className="w-5" />
+            <span className="pl-2">Login</span>
+          </PrimaryButton>
         </Link>
       )}
     </>
   );
 
   return (
-    <header className="w-full backdrop-blur-md bg-white/70 border-b border-gray-100 shadow-sm fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6">
+    <header
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white border-b border-gray-200 shadow-sm"
+          : "bg-base/30 backdrop-blur-md"
+      }`}>
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-16">
-          {/* Left - Logo */}
-          <Link
-            to="/"
-            className="flex items-center gap-1 font-semibold text-lg">
+          <Link to="/" className="flex items-center font-semibold text-lg">
             <Lottie animationData={teeth} loop={true} className="w-10 h-10" />
             <span className="font-bold text-gray-800 tracking-wide text-xl lg:text-2xl">
-              Dentist<span className="text-info">Portal</span>
+              Dentist - <span className="text-info">Portal</span>
             </span>
           </Link>
 
-          {/* Desktop menu */}
           <nav className="hidden lg:flex items-center gap-8">{menuItems}</nav>
 
-          {/* Mobile hamburger */}
           <button className="lg:hidden" onClick={() => setOpen(!open)}>
             <svg
               className="w-7 h-7"
@@ -177,7 +196,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile dropdown */}
         {open && (
           <div className="lg:hidden flex flex-col gap-4 pb-4 mt-2 animate-fadeIn">
             {menuItems}
@@ -185,7 +203,6 @@ const Header = () => {
         )}
       </div>
 
-      {/* Custom CSS for nav links */}
       <style>
         {`
           .nav-link {
