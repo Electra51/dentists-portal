@@ -12,48 +12,52 @@ import Reviews from "../../Pages/Reviews/Reviews";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Main></Main>,
-        errorElement:<ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: '/home',
-                element: <Home></Home>
-            },
-            {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
-                path: '/about',
-                element: <About></About>
-            },
-            {
-                path: '/appointment',
-                element: <Appointment></Appointment>
-            },
-            {
-                path: '/reviews',
-                element: <Reviews></Reviews>
-            },
-            {
-                path: '/contactUs',
-                element: <ContactUs></ContactUs>
-            },
-            {
-                path: '/Login',
-                element: <Login></Login>
-            },
-            {
-                path: '/signup',
-                element: <Signup></Signup>
-            }
-        ]
-    },
-    {
-        path: '/dashboard',
-        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
-    }
+  {
+    path: "/",
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/appointment",
+        element: <Appointment />,
+      },
+      {
+        path: "/reviews",
+        element: <Reviews />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactUs />,
+      },
+    ],
+  },
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+  },
 ]);
 export default router;
