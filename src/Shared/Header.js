@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
 import Lottie from "lottie-react";
 import teeth from "../teeth.json";
@@ -10,7 +10,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
+  const location = useLocation();
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -25,19 +25,35 @@ const Header = () => {
 
   const menuItems = (
     <>
-      <Link to="/" className="nav-link">
+      <Link
+        to="/"
+        className={`nav-link relative pb-1 group ${
+          location.pathname === "/" ? "active-nav" : ""
+        }`}>
         Home
       </Link>
-      <Link to="/appointment" className="nav-link">
+      <Link
+        to="/appointment"
+        className={`nav-link relative pb-1 group ${
+          location.pathname === "/appointment" ? "active-nav" : ""
+        }`}>
         Appointment
       </Link>
-      <Link to="/about" className="nav-link">
+      <Link
+        to="/about"
+        className={`nav-link relative pb-1 group ${
+          location.pathname === "/about" ? "active-nav" : ""
+        }`}>
         About
       </Link>
 
       {user?.uid ? (
         <>
-          <Link to="/dashboard" className="nav-link">
+          <Link
+            to="/dashboard"
+            className={`nav-link relative pb-1 group ${
+              location.pathname === "/dashboard" ? "active-nav" : ""
+            }`}>
             Dashboard
           </Link>
           <button onClick={handleLogOut} className="nav-link">
@@ -67,7 +83,7 @@ const Header = () => {
           <Link to="/" className="flex items-center font-semibold text-lg">
             <Lottie animationData={teeth} loop={true} className="w-10 h-10" />
             <span className="font-bold text-gray-800 tracking-wide text-xl lg:text-2xl">
-              Dentist - <span className="text-info">Portal</span>
+              Dentist - <span className="text-[#5ecdc9]">Portal</span>
             </span>
           </Link>
 
@@ -96,14 +112,6 @@ const Header = () => {
           <div className="flex flex-col gap-4 pb-4 pt-2">{menuItems}</div>
         </div>
       </div>
-
-      <style>
-        {`
-          .nav-link {
-            @apply text-gray-700 hover:text-blue-600 transition font-medium;
-          }
-        `}
-      </style>
     </header>
   );
 };

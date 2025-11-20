@@ -15,3 +15,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.nav-link {
+  @apply text-gray-700 hover:text-[#67D3CF] transition font-medium relative pb-1;
+}
+
+.nav-link::after {
+  content: "";
+  @apply absolute left-0 bottom-0 w-0 h-[2px] bg-[#67D3CF] transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.active-nav {
+  @apply text-[#67D3CF];
+}
+
+.active-nav::after {
+  width: 100%;
+  @apply bg-[#67D3CF];
+}
