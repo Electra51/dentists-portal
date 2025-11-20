@@ -22,7 +22,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="hero mt-20 max-w-7xl mx-auto rounded-md bg-cover bg-center bg-no-repeat"
+      className="hero mt-32 max-w-7xl mx-auto rounded-md bg-cover bg-center bg-no-repeat"
       style={{ background: `url(${contact})` }}>
       <div className="w-full h-full bg-blue/30 rounded-md">
         <div className="hero-content text-center py-16 px-4 md:px-10">

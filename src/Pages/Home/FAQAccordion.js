@@ -1,101 +1,82 @@
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState, useCallback, useMemo } from "react";
+import { ChevronDown, MessageCircleQuestion } from "lucide-react";
 import PrimaryButton from "../../Components/PrimaryButton";
+import SectionHeader from "../../Components/SectionHeader";
+import { faqs } from "../../Shared/Jsondata";
+
+const FAQItem = React.memo(({ faq, isOpen, onToggle }) => {
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+      <button
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="w-full flex items-center justify-between p-6 text-left transition-colors duration-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-400 rounded-lg">
+        <span className="text-lg font-semibold text-gray-800 pr-4">
+          {faq.question}
+        </span>
+        <ChevronDown
+          className={`w-6 h-6 text-teal-500 flex-shrink-0 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      <div
+        aria-hidden={!isOpen}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+        }`}>
+        <div className="px-6 pb-6 pt-2">
+          <p className="text-gray-600 leading-relaxed border-l-4 border-teal-400 pl-4">
+            {faq.answer}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+});
 
 const FAQAccordion = () => {
-  const [openIndex, setOpenIndex] = useState(null);
-  const scrollToContact = () => {
+  const scrollToContact = useCallback(() => {
     document.getElementById("contact")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-  };
-  const faqs = [
-    {
-      question: "What services do you offer?",
-      answer:
-        "We offer comprehensive dental care including teeth examinations, cavity filling, dental implants, teeth whitening, orthodontics, root canal treatment, and preventive care. Our experienced team uses the latest technology to ensure the best outcomes.",
-    },
-    {
-      question: "How often should I visit the dentist?",
-      answer:
-        "We recommend visiting the dentist every 6 months for regular check-ups and cleanings. However, if you have specific dental issues or concerns, more frequent visits may be necessary. Regular visits help prevent serious problems and maintain optimal oral health.",
-    },
-    {
-      question: "Do you accept insurance?",
-      answer:
-        "Yes, we accept most major dental insurance plans. Our team will work with your insurance provider to maximize your benefits. We also offer flexible payment plans for treatments not covered by insurance. Contact us to verify your specific insurance coverage.",
-    },
-    {
-      question: "What should I do in a dental emergency?",
-      answer:
-        "For dental emergencies, contact us immediately at +880 1234-56789. We provide emergency dental services for issues like severe toothaches, broken teeth, knocked-out teeth, or lost fillings. If it's after hours, we have an emergency hotline available.",
-    },
-    {
-      question: "Is teeth whitening safe?",
-      answer:
-        "Yes, professional teeth whitening is safe when performed by our trained dental professionals. We use approved whitening agents and follow strict safety protocols. The procedure is minimally invasive and provides excellent results that can last for years with proper care.",
-    },
-    {
-      question: "How long does a typical appointment take?",
-      answer:
-        "A routine check-up and cleaning typically takes 45-60 minutes. More complex procedures like fillings or root canals may require 1-2 hours. We always provide estimated appointment times when you book and strive to stay on schedule.",
-    },
-  ];
+  }, []);
+  const [openIndex, setOpenIndex] = useState(0);
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const toggleFAQ = useCallback(
+    (index) => setOpenIndex((prev) => (prev === index ? null : index)),
+    []
+  );
+
+  const faqList = useMemo(
+    () =>
+      faqs.map((faq, index) => (
+        <FAQItem
+          key={index}
+          faq={faq}
+          isOpen={openIndex === index}
+          onToggle={() => toggleFAQ(index)}
+        />
+      )),
+    [openIndex, toggleFAQ]
+  );
 
   return (
-    <div className="py-16 px-4">
+    <div className="px-4 mt-32">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-3">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Find answers to common questions about our dental services
-          </p>
-        </div>
+        <SectionHeader
+          icon={MessageCircleQuestion}
+          label="FAQ"
+          title="Frequently Asked Questions"
+          subtitle="Find answers to common questions about our dental services"
+        />
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between p-6 text-left transition-colors duration-200 hover:bg-gray-50">
-                <span className="text-lg font-semibold text-gray-800 pr-4">
-                  {faq.question}
-                </span>
-                <ChevronDown
-                  className={`w-6 h-6 text-teal-500 flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === index
-                    ? "max-h-96 opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}>
-                <div className="px-6 pb-6 pt-2">
-                  <p className="text-gray-600 leading-relaxed border-l-4 border-teal-400 pl-4">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="space-y-4 mt-8">{faqList}</div>
 
         <div className="mt-12 text-center">
           <p className="text-gray-600 mb-4">Still have questions?</p>
-
           <PrimaryButton onClick={scrollToContact}>Contact Us</PrimaryButton>
         </div>
       </div>

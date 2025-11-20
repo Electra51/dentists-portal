@@ -34,7 +34,12 @@
 
 import React from "react";
 
-const PrimaryButton = ({ children, variant = "solid", className = "" }) => {
+const PrimaryButton = ({
+  children,
+  variant = "solid",
+  className = "",
+  onClick,
+}) => {
   const baseClasses =
     "btn btn-primary px-6 py-2.5 rounded-lg font-semibold transition-all duration-300";
 
@@ -46,7 +51,9 @@ const PrimaryButton = ({ children, variant = "solid", className = "" }) => {
   };
 
   return (
-    <button className={`${baseClasses} ${variants[variant]} ${className}`}>
+    <button
+      onClick={onClick}
+      className={`${baseClasses} ${variants[variant]} ${className}`}>
       {children}
     </button>
   );

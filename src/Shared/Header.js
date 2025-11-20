@@ -1,48 +1,39 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
-import Lottie from "lottie-react";
-import teeth from "../teeth.json";
-import { LogIn } from "lucide-react";
+import { LogIn, X, Menu } from "lucide-react";
 import PrimaryButton from "../Components/PrimaryButton";
+import LogoName from "../Components/LogoName";
 
-const Header = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleLogOut = () => {
-    logOut().catch((err) => console.log(err));
-  };
-
-  const menuItems = (
+const NavItems = React.memo(({ user, pathname, handleLogOut }) => {
+  return (
     <>
       <Link
         to="/"
         className={`nav-link relative pb-1 group ${
-          location.pathname === "/" ? "active-nav" : ""
+          pathname === "/" ? "active-nav" : ""
         }`}>
         Home
       </Link>
+
       <Link
         to="/appointment"
         className={`nav-link relative pb-1 group ${
-          location.pathname === "/appointment" ? "active-nav" : ""
+          pathname === "/appointment" ? "active-nav" : ""
         }`}>
         Appointment
       </Link>
+
       <Link
         to="/about"
         className={`nav-link relative pb-1 group ${
-          location.pathname === "/about" ? "active-nav" : ""
+          pathname === "/about" ? "active-nav" : ""
         }`}>
         About
       </Link>
@@ -52,10 +43,11 @@ const Header = () => {
           <Link
             to="/dashboard"
             className={`nav-link relative pb-1 group ${
-              location.pathname === "/dashboard" ? "active-nav" : ""
+              pathname === "/dashboard" ? "active-nav" : ""
             }`}>
             Dashboard
           </Link>
+
           <button onClick={handleLogOut} className="nav-link">
             Sign out
           </button>
@@ -70,46 +62,70 @@ const Header = () => {
       )}
     </>
   );
+});
+
+const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const location = useLocation();
+
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleLogOut = useCallback(() => {
+    logOut().catch((err) => console.log(err));
+  }, [logOut]);
+
+  useEffect(() => {
+    let timeout = null;
+
+    const handleScroll = () => {
+      if (timeout) return;
+
+      timeout = setTimeout(() => {
+        const isScrolled = window.scrollY > 10;
+        setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
+        timeout = null;
+      }, 120);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const menuItems = useMemo(
+    () => (
+      <NavItems
+        user={user}
+        pathname={location.pathname}
+        handleLogOut={handleLogOut}
+      />
+    ),
+    [user, location.pathname, handleLogOut]
+  );
 
   return (
     <header
       className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white border-b border-gray-200 shadow-sm"
-          : "bg-base/30 backdrop-blur-md"
+          ? "bg-white/95 border-b border-gray-200 shadow-sm backdrop-blur-md"
+          : "bg-white/30 backdrop-blur-xl"
       }`}>
       <div className="max-w-7xl mx-auto px-4 lg:px-0 py-1.5">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center font-semibold text-lg">
-            <Lottie animationData={teeth} loop={true} className="w-10 h-10" />
-            <span className="font-bold text-gray-800 tracking-wide text-xl lg:text-2xl">
-              Dentist - <span className="text-[#5ecdc9]">Portal</span>
-            </span>
-          </Link>
-
+          <LogoName />
           <nav className="hidden lg:flex items-center gap-8">{menuItems}</nav>
-
-          <button className="lg:hidden" onClick={() => setOpen(!open)}>
-            <svg
-              className="w-7 h-7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-              />
-            </svg>
+          <button
+            className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition"
+            onClick={() => setOpen((prev) => !prev)}>
+            {open ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
 
         <div
-          className={`lg:hidden transition-all duration-300 overflow-hidden ${
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
             open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}>
-          <div className="flex flex-col gap-4 pb-4 pt-2">{menuItems}</div>
+          <div className="flex flex-col gap-4 py-4">{menuItems}</div>
         </div>
       </div>
     </header>
