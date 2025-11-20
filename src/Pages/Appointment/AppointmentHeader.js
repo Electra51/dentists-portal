@@ -3,8 +3,8 @@ import banner from "../../assets/images/chair.png";
 import { DayPicker } from "react-day-picker";
 import appointmentBg from "../../assets/images/appointment.png";
 import "./CustomDayPicker.css";
+
 const AppointmentHeader = ({ selectedDate, setSelectedDate }) => {
-  // const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <div>
       <div
@@ -25,22 +25,11 @@ const AppointmentHeader = ({ selectedDate, setSelectedDate }) => {
           backgroundImage: `url("https://i.ibb.co/wNqKDzB/bg.png")`,
         }}>
         <div className="hero-content grid grid-cols-2">
-          {/* <div className="border">
-            <DayPicker
-              mode="single"
-              selected={selectedDate}
-              onSelect={(selectedDate) => {
-                if (selectedDate) {
-                  setSelectedDate(selectedDate);
-                }
-              }}
-            />
-          </div> */}
           <div className="daypicker-wrapper">
             <DayPicker
               animate
               mode="single"
-              fixedWeeks // Add this prop - forces 6 weeks always
+              fixedWeeks
               selected={selectedDate}
               onSelect={(date) => {
                 if (date) {
@@ -55,11 +44,6 @@ const AppointmentHeader = ({ selectedDate, setSelectedDate }) => {
             />
           </div>
 
-          {/* {selectedDate && (
-            <div className="selected-date-display">
-              <p>Selected Date: {selectedDate.toLocaleDateString()}</p>
-            </div>
-          )} */}
           <div className="relative bg-white rounded-3xl shadow-2xl p-3 sm:p-4 transform hover:scale-105 transition-transform duration-500 m-6 sm:m-11">
             <img
               src={banner}

@@ -1,34 +1,3 @@
-// import React from "react";
-
-// const AppointmentOption = ({ option, setTreatments }) => {
-//   const { problemName, slots } = option;
-//   return (
-//     <div className="card w-96 bg-base-100 shadow-xl max-w-5xl mx-auto">
-//       <div className="card-body text-center">
-//         <h2 className="font-bold text-xl text-center text-primary">
-//           {problemName}
-//         </h2>
-//         <p>{slots.length > 0 ? slots[0] : "Please Try Another day"}</p>
-//         <p>
-//           {slots.length}
-//           {slots.length > 1 ? "spaces" : "space"} available
-//         </p>
-//         <div className="card-actions justify-center">
-//           <label
-//             disabled={slots.length === 0}
-//             htmlFor="booking-modal"
-//             onClick={() => setTreatments(option)}
-//             className="btn btn-primary text-white">
-//             Book Appointment
-//           </label>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AppointmentOption;
-
 import React, { useState } from "react";
 import { Clock, Users, ChevronRight } from "lucide-react";
 
@@ -108,7 +77,7 @@ const AppointmentOption = ({ option, setTreatments }) => {
             className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
               slots.length === 0
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 shadow-md hover:to-secondary rounded-md hover:shadow-xl"
+                : "bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 hover:to-info rounded-md hover:shadow-xl shadow-[#5ecdc9]"
             }`}
             style={{
               transform:
@@ -125,8 +94,6 @@ const AppointmentOption = ({ option, setTreatments }) => {
           </label>
         </div>
       </div>
-
-      <div className="h-1.5 bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 shadow-md group-hover:h-2 transition-all duration-300" />
     </div>
   );
 };

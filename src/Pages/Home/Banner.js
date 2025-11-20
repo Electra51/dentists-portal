@@ -1,6 +1,7 @@
 import React from "react";
 import banner from "../../assets/images/chair.png";
 import PrimaryButton from "../../Components/PrimaryButton";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -28,7 +29,9 @@ const Banner = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <PrimaryButton variant="solid">Get Started</PrimaryButton>
+            <Link to="/appointment">
+              <PrimaryButton variant="solid">Get Started</PrimaryButton>
+            </Link>
           </div>
         </div>
 

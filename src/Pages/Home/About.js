@@ -71,7 +71,11 @@ const About = () => {
               <Link to={"/about"}>
                 <PrimaryButton>Learn More</PrimaryButton>
               </Link>
-              <PrimaryButton variant="outline">Book Appointment</PrimaryButton>
+              <Link to={"/appointment"}>
+                <PrimaryButton variant="outline">
+                  Book Appointment
+                </PrimaryButton>
+              </Link>
             </div>
           </div>
         </div>
