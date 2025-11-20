@@ -1,0 +1,209 @@
+/* DayPicker Wrapper - Full Width */
+.daypicker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.custom-daypicker *,
+.custom-daypicker {
+  box-sizing: border-box;
+}
+
+/* Make DayPicker Full Width */
+.custom-daypicker {
+  width: 100% !important;
+  max-width: 100% !important;
+  /* transition: height 0.3s ease; */
+}
+.rdp-weeknumber,
+.rdp-day {
+  margin: 0 5px !important; /* Much smaller → no overflow */
+}
+.custom-daypicker .rdp-day,
+.custom-daypicker .rdp-head_cell,
+.custom-daypicker .rdp-cell {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+.custom-daypicker .rdp-day {
+  width: 100%;
+  aspect-ratio: 1;
+} /* Give consistent spacing */
+.custom-daypicker .rdp-cell {
+  padding: 6px !important;
+}
+.custom-daypicker .rdp-months {
+  width: 100%;
+  justify-content: center;
+}
+
+.custom-daypicker .rdp-month {
+  width: 100%;
+  max-width: 100%;
+}
+
+.custom-daypicker .rdp-table {
+  width: 100%;
+  max-width: 100%;
+  height: 350px; /* Fixed height */
+}
+.custom-daypicker .rdp-tbody {
+  height: 100%;
+}
+
+/* Ensure equal spacing for all rows */
+.custom-daypicker .rdp-row {
+  height: calc(100% / 6); /* Always reserve space for 6 weeks */
+}
+/* Caption (Month/Year Dropdown) Styles */
+.custom-daypicker .rdp-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.custom-daypicker .rdp-caption_dropdowns {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.custom-daypicker .rdp-dropdown {
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #2bbbd7;
+  border-radius: 50%;
+  background: white;
+  color: #2bbbd7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-daypicker .rdp-dropdown:hover {
+  background: #2bbbd7;
+  color: white;
+}
+
+.custom-daypicker .rdp-dropdown:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+/* Weekday Headers */
+.custom-daypicker .rdp-head_cell {
+  font-weight: 700;
+  color: #2bbbd7;
+  font-size: 14px;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+/* Day Cells */
+.custom-daypicker .rdp-cell {
+  padding: 4px;
+}
+.rdp-head_cell {
+  /* border: 1px solid #000 !important; */
+  width: 30px !important;
+}
+.rdp {
+  margin: 0 !important;
+}
+.custom-daypicker .rdp-day {
+  width: 100%;
+  aspect-ratio: 1; /* Makes cells square */
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.custom-daypicker .rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
+  background: #f0f4ff;
+  border-color: #2bbbd7;
+  transform: scale(1.05);
+}
+
+/* Selected Day */
+.custom-daypicker .rdp-day_selected {
+  background: linear-gradient(135deg, #64c7ab 0%, #5ad2eb 100%);
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  border-color: #2bbbd7;
+}
+
+/* Today's Date */
+.custom-daypicker .rdp-day_today:not(.rdp-day_selected) {
+  background: #fff4e6;
+  border-color: #ff9800;
+  color: #ff9800;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+/* Disabled Days */
+.custom-daypicker .rdp-day_disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Outside Days (from other months) */
+.custom-daypicker .rdp-day_outside {
+  color: #999;
+  opacity: 0.5;
+}
+
+/* Navigation Buttons (if using arrows) */
+.custom-daypicker .rdp-nav_button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f0f4ff;
+  border: none;
+  color: #2bbbd7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-daypicker .rdp-nav_button:hover {
+  background: #2bbbd7;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Selected Date Display */
+.selected-date-display {
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2bbbd7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .appointment-title {
+    font-size: 1.5rem;
+  }
+
+  .custom-daypicker .rdp-day {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .custom-daypicker .rdp-dropdown {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}

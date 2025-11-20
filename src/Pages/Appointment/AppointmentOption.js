@@ -1,25 +1,144 @@
-import React from 'react';
+// import React from "react";
 
+// const AppointmentOption = ({ option, setTreatments }) => {
+//   const { problemName, slots } = option;
+//   return (
+//     <div className="card w-96 bg-base-100 shadow-xl max-w-5xl mx-auto">
+//       <div className="card-body text-center">
+//         <h2 className="font-bold text-xl text-center text-primary">
+//           {problemName}
+//         </h2>
+//         <p>{slots.length > 0 ? slots[0] : "Please Try Another day"}</p>
+//         <p>
+//           {slots.length}
+//           {slots.length > 1 ? "spaces" : "space"} available
+//         </p>
+//         <div className="card-actions justify-center">
+//           <label
+//             disabled={slots.length === 0}
+//             htmlFor="booking-modal"
+//             onClick={() => setTreatments(option)}
+//             className="btn btn-primary text-white">
+//             Book Appointment
+//           </label>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
+// export default AppointmentOption;
+
+import React, { useState, useEffect } from "react";
+import { format } from "date-fns";
+import { Calendar, Clock, Users, ChevronRight, Sparkles } from "lucide-react";
+
+// AppointmentOption Component - Same logic, new design
 const AppointmentOption = ({ option, setTreatments }) => {
-    const { problemName, slots } = option;
-    return (
-        <div className="card w-96 bg-base-100 shadow-xl">
-            <div className="card-body text-center">
-                <h2 className="font-bold text-xl text-center text-primary">{problemName}</h2>
-                <p>{slots.length > 0 ? slots[0] : 'Please Try Another day'}</p>
-                <p>{slots.length}{slots.length > 1 ? 'spaces' : 'space'} available</p>
-                <div className="card-actions justify-center">
+  const { problemName, slots } = option;
+  const [isHovered, setIsHovered] = useState(false);
 
-                    <label disabled={
-                        slots.length === 0
-                    }
-                        htmlFor="booking-modal"
-                        onClick={() => setTreatments(option)} className="btn btn-primary text-white">Book Appointment</label>
-                </div>
-            </div>
+  // Icon mapping based on problem name
+  const getIcon = (name) => {
+    const iconMap = {
+      "Teeth Orthodontics": "🦷",
+      "Cosmetic Dentistry": "✨",
+      "Teeth Cleaning": "🪥",
+      "Cavity Protection": "🛡️",
+      "Pediatric Dental": "👶",
+      "Oral Surgery": "🏥",
+    };
+    return iconMap[name] || "🦷";
+  };
+
+  return (
+    <div
+      className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        transform: isHovered ? "translateY(-8px)" : "translateY(0)",
+        border: "1px solid #e5e7eb",
+      }}>
+      {/* Gradient overlay on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+        style={{
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        }}
+      />
+
+      {/* Icon badge */}
+      <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+        <span className="text-3xl">{getIcon(problemName)}</span>
+      </div>
+
+      <div className="p-6 pt-8">
+        {/* Header */}
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors duration-300 text-center">
+            {problemName}
+          </h2>
         </div>
-    );
+
+        {/* Stats Grid */}
+        <div className="space-y-4 mb-6">
+          <div className="flex items-center gap-3 bg-gradient-to-br from-purple-50 to-indigo-50 p-4 rounded-xl">
+            <Clock className="w-5 h-5 text-purple-600 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-xs text-gray-500 font-medium mb-1">
+                Next Available
+              </p>
+              <p className="text-sm font-bold text-gray-800">
+                {slots.length > 0 ? slots[0] : "Please Try Another day"}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl">
+            <Users className="w-5 h-5 text-green-600 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-xs text-gray-500 font-medium mb-1">
+                Available Slots
+              </p>
+              <p className="text-sm font-bold text-gray-800">
+                {slots.length} {slots.length > 1 ? "spaces" : "space"} available
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Book button */}
+        <div className="card-actions justify-center">
+          <label
+            disabled={slots.length === 0}
+            htmlFor="booking-modal"
+            onClick={() => setTreatments(option)}
+            className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+              slots.length === 0
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl"
+            }`}
+            style={{
+              transform:
+                isHovered && slots.length > 0 ? "scale(1.02)" : "scale(1)",
+            }}>
+            {slots.length === 0 ? (
+              "No Slots Available"
+            ) : (
+              <>
+                Book Appointment
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
+          </label>
+        </div>
+      </div>
+
+      {/* Bottom accent line */}
+      <div className="h-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 group-hover:h-2 transition-all duration-300" />
+    </div>
+  );
 };
 
 export default AppointmentOption;
