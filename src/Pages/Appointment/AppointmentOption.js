@@ -29,16 +29,13 @@
 
 // export default AppointmentOption;
 
-import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
-import { Calendar, Clock, Users, ChevronRight, Sparkles } from "lucide-react";
+import React, { useState } from "react";
+import { Clock, Users, ChevronRight } from "lucide-react";
 
-// AppointmentOption Component - Same logic, new design
 const AppointmentOption = ({ option, setTreatments }) => {
   const { problemName, slots } = option;
   const [isHovered, setIsHovered] = useState(false);
 
-  // Icon mapping based on problem name
   const getIcon = (name) => {
     const iconMap = {
       "Teeth Orthodontics": "🦷",
@@ -53,14 +50,12 @@ const AppointmentOption = ({ option, setTreatments }) => {
 
   return (
     <div
-      className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group"
+      className="relative bg-white rounded-lg shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
-        transform: isHovered ? "translateY(-8px)" : "translateY(0)",
         border: "1px solid #e5e7eb",
       }}>
-      {/* Gradient overlay on hover */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
         style={{
@@ -68,20 +63,17 @@ const AppointmentOption = ({ option, setTreatments }) => {
         }}
       />
 
-      {/* Icon badge */}
-      <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+      <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 shadow-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
         <span className="text-3xl">{getIcon(problemName)}</span>
       </div>
 
       <div className="p-6 pt-8">
-        {/* Header */}
         <div className="mb-4">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors duration-300 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-info transition-colors duration-300 text-center">
             {problemName}
           </h2>
         </div>
 
-        {/* Stats Grid */}
         <div className="space-y-4 mb-6">
           <div className="flex items-center gap-3 bg-gradient-to-br from-purple-50 to-indigo-50 p-4 rounded-xl">
             <Clock className="w-5 h-5 text-purple-600 flex-shrink-0" />
@@ -108,7 +100,6 @@ const AppointmentOption = ({ option, setTreatments }) => {
           </div>
         </div>
 
-        {/* Book button */}
         <div className="card-actions justify-center">
           <label
             disabled={slots.length === 0}
@@ -117,7 +108,7 @@ const AppointmentOption = ({ option, setTreatments }) => {
             className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
               slots.length === 0
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl"
+                : "bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 shadow-md hover:to-secondary rounded-md hover:shadow-xl"
             }`}
             style={{
               transform:
@@ -135,8 +126,7 @@ const AppointmentOption = ({ option, setTreatments }) => {
         </div>
       </div>
 
-      {/* Bottom accent line */}
-      <div className="h-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 group-hover:h-2 transition-all duration-300" />
+      <div className="h-1.5 bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 shadow-md group-hover:h-2 transition-all duration-300" />
     </div>
   );
 };
