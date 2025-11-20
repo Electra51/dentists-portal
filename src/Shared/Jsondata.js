@@ -1,3 +1,7 @@
+import { Check, Award, Shield } from "lucide-react";
+import fluoride from "../assets/images/fluoride.png";
+import cavity from "../assets/images/cavity.png";
+import whitening from "../assets/images/whitening.png";
 export const gallaryData = [
   {
     id: 1,
@@ -106,5 +110,41 @@ export const reviewsData = [
       "Professional and caring service. They explained every step thoroughly!",
     location: "California",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300",
+  },
+];
+
+export const features = [
+  { icon: Check, text: "Quick and painless procedures" },
+  { icon: Check, text: "Experienced dental professionals" },
+  { icon: Check, text: "State-of-the-art equipment" },
+  { icon: Check, text: "Flexible scheduling options" },
+];
+
+export const stats = [
+  { number: "500+", label: "Happy Patients", icon: Award },
+  { number: "50k+", label: "Procedures", icon: Shield },
+  { number: "4.9★", label: "Patient Rating", icon: Award },
+];
+export const serviceData = [
+  {
+    id: 1,
+    serviceName: "Fluoride Treatment",
+    description:
+      "Fluoride treatments are a great way to prevent more cavities in patients who are already prone to them.",
+    icon: fluoride,
+  },
+  {
+    id: 2,
+    serviceName: "Cavity Filling",
+    description:
+      "A cavity filling is when the dentist fills the opening in your tooth with some kind of material.",
+    icon: cavity,
+  },
+  {
+    id: 3,
+    serviceName: "Teeth Whitening",
+    description:
+      "Teeth Whitening is a quick and painless in-office whitening system that provides dramatic results",
+    icon: whitening,
   },
 ];

@@ -37,7 +37,6 @@ const LiveChatWidget = () => {
   const handleSendMessage = (text = message) => {
     if (!text.trim()) return;
 
-    // Add user message
     const userMessage = {
       id: messages.length + 1,
       text: text,
@@ -51,10 +50,8 @@ const LiveChatWidget = () => {
     setMessages((prev) => [...prev, userMessage]);
     setMessage("");
 
-    // Simulate bot typing
     setIsTyping(true);
 
-    // Auto reply after 1.5 seconds
     setTimeout(() => {
       const botReply = getBotReply(text);
       setMessages((prev) => [
@@ -100,7 +97,7 @@ const LiveChatWidget = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 bg-teal-500 text-white p-4 rounded-full shadow-2xl hover:bg-teal-600 transition-all duration-300 hover:scale-110 z-50 group">
+          className="fixed bottom-6 right-6 bg-gradient-to-r from-secondary to-info text-white  shadow-md p-4 rounded-full  hover:bg-teal-600 transition-all duration-300 hover:scale-110 z-50 group">
           <MessageCircle className="w-6 h-6" />
 
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold animate-pulse">
@@ -118,10 +115,10 @@ const LiveChatWidget = () => {
           className={`fixed bottom-6 right-6 w-96 bg-white rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 ${
             isMinimized ? "h-16" : "h-[600px]"
           }`}>
-          <div className="bg-gradient-to-r from-teal-500 to-teal-600 text-white p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 shadow-md p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <User className="w-6 h-6 text-teal-500" />
+                <User className="w-6 h-6 text-[#5ecdc9]" />
               </div>
               <div>
                 <h3 className="font-semibold">Dentist Portal</h3>
@@ -137,12 +134,12 @@ const LiveChatWidget = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="hover:bg-teal-700 p-1 rounded transition-colors">
+                className="hover:bg-[#5ecdc9] p-1 rounded transition-colors">
                 <Minimize2 className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="hover:bg-teal-700 p-1 rounded transition-colors">
+                className="hover:bg-[#5ecdc9] p-1 rounded transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
