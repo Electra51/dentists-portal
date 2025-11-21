@@ -1,4 +1,4 @@
-import { Check, Award, Shield } from "lucide-react";
+import { Check, Award, Shield, Bell, Activity, BarChart3 } from "lucide-react";
 import fluoride from "../assets/images/fluoride.png";
 import cavity from "../assets/images/cavity.png";
 import whitening from "../assets/images/whitening.png";
@@ -12,7 +12,9 @@ import {
   CreditCard,
   Settings,
   UserCircle,
+  FolderOpen,
 } from "lucide-react";
+
 export const gallaryData = [
   {
     id: 1,
@@ -160,18 +162,35 @@ export const serviceData = [
   },
 ];
 
-export const menuItemsSideBar = [
+export const dentistMenuItems = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/dashboard/appointments", label: "Appointments", icon: Calendar },
   { path: "/dashboard/patients", label: "Patients", icon: Users },
-  {
-    path: "/dashboard/prescriptions",
-    label: "Prescriptions",
-    icon: FileText,
-  },
+  { path: "/dashboard/prescriptions", label: "Prescriptions", icon: FileText },
   { path: "/dashboard/schedule", label: "Schedule", icon: Clock },
   { path: "/dashboard/reviews", label: "Reviews", icon: Star },
   { path: "/dashboard/payments", label: "Payments", icon: CreditCard },
   { path: "/dashboard/settings", label: "Settings", icon: Settings },
   { path: "/dashboard/profile", label: "Profile", icon: UserCircle },
+];
+
+export const patientMenuItems = [
+  { path: "/patient/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { path: "/patient/appointments", label: "My Appointments", icon: Calendar },
+  { path: "/patient/records", label: "Medical Records", icon: FolderOpen },
+  { path: "/patient/prescriptions", label: "Prescriptions", icon: FileText },
+  { path: "/patient/payments", label: "Payments & Bills", icon: CreditCard },
+  { path: "/patient/notifications", label: "Notifications", icon: Bell },
+  { path: "/patient/profile", label: "My Profile", icon: UserCircle },
+];
+
+export const adminMenuItems = [
+  { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { path: "/admin/dentists", label: "Manage Dentists", icon: Users },
+  { path: "/admin/patients", label: "Manage Patients", icon: Activity },
+  { path: "/admin/appointments", label: "All Appointments", icon: Calendar },
+  { path: "/admin/payments", label: "Revenue & Payments", icon: BarChart3 },
+  { path: "/admin/reports", label: "Reports", icon: FileText },
+  { path: "/admin/reviews", label: "Reviews & Feedback", icon: Star },
+  { path: "/admin/settings", label: "System Settings", icon: Settings },
 ];
