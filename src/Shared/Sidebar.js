@@ -1,39 +1,50 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "lucide-react";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import LogoName from "../Components/LogoName";
 import { adminMenuItems, dentistMenuItems, patientMenuItems } from "./Jsondata";
-const Sidebar = ({ role = "dentist" }) => {
-  const getMenuItems = () => {
+import { logout } from "../redux/slice/authSlice";
+import { AuthContext } from "../Contexts/AuthProvider";
+import { ROLES } from "../Constatnts/roles";
+
+const Sidebar = ({ role }) => {
+  console.log("role", role);
+
+  const { logOut } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const getMenuItems = useCallback(() => {
+    console.log("Role received:", role);
+
     switch (role) {
-      case "patient":
+      case ROLES.PATIENT:
         return patientMenuItems;
-      case "admin":
+      case ROLES.ADMIN:
         return adminMenuItems;
-      case "dentist":
+      case ROLES.DENTIST:
       default:
         return dentistMenuItems;
     }
-  };
+  }, [role]);
 
-  const menuItems = getMenuItems();
-
-  const getColorScheme = () => {
+  const getColorScheme = useCallback(() => {
     switch (role) {
-      case "patient":
+      case ROLES.PATIENT:
         return {
           active: "bg-green-50 text-green-600",
           hover: "hover:bg-green-50",
           iconActive: "text-green-600",
         };
-      case "admin":
+      case ROLES.ADMIN:
         return {
           active: "bg-purple-50 text-purple-600",
           hover: "hover:bg-purple-50",
           iconActive: "text-purple-600",
         };
-      case "dentist":
+      case ROLES.DENTIST:
       default:
         return {
           active: "bg-blue-50 text-[#42c4c0]",
@@ -41,8 +52,21 @@ const Sidebar = ({ role = "dentist" }) => {
           iconActive: "text-[#42c4c0]",
         };
     }
-  };
+  }, [role]);
 
+  const handleLogOut = useCallback(() => {
+    logOut()
+      .then(() => {
+        dispatch(logout());
+        localStorage.removeItem("token");
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.error("Logout error:", err);
+      });
+  }, [logOut, dispatch, navigate]);
+
+  const menuItems = getMenuItems();
   const colors = getColorScheme();
 
   return (
@@ -85,7 +109,10 @@ const Sidebar = ({ role = "dentist" }) => {
       </div>
 
       <div className="mt-auto p-5 border-t">
-        <button className="flex items-center gap-3 px-4 py-3 w-full text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200">
+        <button
+          className="flex items-center gap-3 px-4 py-3 w-full text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200"
+          onClick={handleLogOut}
+          aria-label="Logout">
           <LogOut size={20} />
           <span>Logout</span>
         </button>

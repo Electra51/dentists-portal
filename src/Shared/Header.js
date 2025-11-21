@@ -10,7 +10,9 @@ import { AuthContext } from "../Contexts/AuthProvider";
 import { LogIn, X, Menu } from "lucide-react";
 import PrimaryButton from "../Components/PrimaryButton";
 import LogoName from "../Components/LogoName";
-
+import { logout } from "../redux/slice/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const NavItems = React.memo(({ user, pathname, handleLogOut }) => {
   return (
     <>
@@ -70,10 +72,16 @@ const Header = () => {
 
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogOut = useCallback(() => {
-    logOut().catch((err) => console.log(err));
-  }, [logOut]);
+    logOut()
+      .then(() => {
+        dispatch(logout());
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
+  }, [logOut, dispatch, navigate]);
 
   useEffect(() => {
     let timeout = null;
