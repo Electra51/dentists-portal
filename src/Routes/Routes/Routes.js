@@ -10,6 +10,7 @@ import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Login/Signup";
 import Reviews from "../../Pages/Reviews/Reviews";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import DashboardLayout from "../../Layout/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -51,13 +52,60 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+  // {
+  //   path: "/dashboard",
+  //   element: (
+  //     <PrivateRoute>
+  //       <Dashboard />
+  //     </PrivateRoute>
+  //   ),
+  // },
+
   {
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard />
+        <DashboardLayout />
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
+      {
+        path: "appointments",
+        element: <h2>Appointments</h2>,
+      },
+      {
+        path: "patients",
+        element: <h2>patients</h2>,
+      },
+      {
+        path: "prescriptions",
+        element: <h2>prescriptions page</h2>,
+      },
+      {
+        path: "schedule",
+        element: <h2>schedule page</h2>,
+      },
+      {
+        path: "reviews",
+        element: <h2>reviews page</h2>,
+      },
+      {
+        path: "payments",
+        element: <h2>payments page</h2>,
+      },
+      {
+        path: "profile",
+        element: <h2>Profile page</h2>,
+      },
+      {
+        path: "settings",
+        element: <h2>Settings page</h2>,
+      },
+    ],
   },
 ]);
 export default router;

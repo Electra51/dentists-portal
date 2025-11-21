@@ -2,6 +2,17 @@ import { Check, Award, Shield } from "lucide-react";
 import fluoride from "../assets/images/fluoride.png";
 import cavity from "../assets/images/cavity.png";
 import whitening from "../assets/images/whitening.png";
+import {
+  LayoutDashboard,
+  Calendar,
+  Users,
+  FileText,
+  Clock,
+  Star,
+  CreditCard,
+  Settings,
+  UserCircle,
+} from "lucide-react";
 export const gallaryData = [
   {
     id: 1,
@@ -147,4 +158,20 @@ export const serviceData = [
       "Teeth Whitening is a quick and painless in-office whitening system that provides dramatic results",
     icon: whitening,
   },
+];
+
+export const menuItemsSideBar = [
+  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { path: "/dashboard/appointments", label: "Appointments", icon: Calendar },
+  { path: "/dashboard/patients", label: "Patients", icon: Users },
+  {
+    path: "/dashboard/prescriptions",
+    label: "Prescriptions",
+    icon: FileText,
+  },
+  { path: "/dashboard/schedule", label: "Schedule", icon: Clock },
+  { path: "/dashboard/reviews", label: "Reviews", icon: Star },
+  { path: "/dashboard/payments", label: "Payments", icon: CreditCard },
+  { path: "/dashboard/settings", label: "Settings", icon: Settings },
+  { path: "/dashboard/profile", label: "Profile", icon: UserCircle },
 ];
