@@ -1,77 +1,8 @@
-// import React, { useContext, useState } from 'react';
-// import { useForm } from 'react-hook-form';
-// import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { AuthContext } from '../../Contexts/AuthProvider';
-
-// const Login = () => {
-//     const { register, handleSubmit, formState: { errors } } = useForm();
-//     const { login } = useContext(AuthContext);
-//     const [loginError, setLoginError] = useState('');
-//     const location = useLocation();
-//     const navigate = useNavigate();
-//     const from = location.state?.from?.pathName || '/';
-//     const handleLogin = (data) => {
-//         console.log(data);
-//         setLoginError('');
-//         login(data.email, data.password)
-//             .then(result => {
-//                 const user = result.user;
-//                 console.log(user);
-//                 navigate(from,{replace:true})
-//             })
-//             .catch(err => {
-//                 console.log(err.message);
-//                 setLoginError(err.message);
-//             });
-//     }
-//     return (
-//         <div className='h-[600px] flex justify-center items-center'>
-//             <div className='w-96 p-5 border rounded-md'>
-//                 <h1 className='text-3xl font-bold'>Login</h1>
-//                 <form onSubmit={handleSubmit((handleLogin))}>
-//                     <div className="form-control">
-//                         <label className="label">
-//                             <span className="label-text">Email</span>
-//                         </label>
-//                         <input type="email" {...register("email", { required: "Email Address is required" })} className="input input-bordered " />
-//                         {errors.email && <p className='text-red-600 text-left' role="alert">{errors.email?.message}</p>}
-//                     </div >
-//                     <div className="form-control">
-//                         <label className="label">
-//                             <span className="label-text">Password</span>
-//                         </label>
-//                         <input type="password" {...register(
-//                             "password",
-//                             {
-//                                 required: "Password is required",
-//                                 minLength: { value: 6, message: 'password must be 6 characters' }
-//                             },
-//                         )}
-//                             className="input input-bordered " />
-//                         {errors.password && <p className='text-red-600 text-left' role="alert">{errors.password?.message}</p>}
-//                         {loginError && <p className='text-red-600 text-left'>{loginError}</p>}
-//                     </div>
-
-//                     <label className="label">
-//                         <span className="label-text">Forget Password?</span>
-//                     </label>
-//                     <input className='btn btn-primary w-full mt-5' type="submit" value='Log In' />
-//                     <p>New to Dentists portal? <Link to='/signup' className='text-primary font-semibold'>Sign Up</Link> </p>
-//                     <div className="divider">OR</div>
-//                     <button className='btn btn-outline btn-primary w-full'>Continue with Google</button>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Login;
-
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
-import Lottie from "lottie-react";
-import teeth from "../../teeth.json";
+import LogoName from "../../Components/LogoName";
+import FooterTag from "../../Components/FooterTag";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -126,13 +57,8 @@ export default function Login() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-teal-50 flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <div className="text-center mb-8 flex flex-col justify-center items-center">
-          <Link to="/" className="flex items-center font-semibold text-lg">
-            <Lottie animationData={teeth} loop={true} className="w-10 h-10" />
-            <span className="font-bold text-gray-800 tracking-wide text-xl lg:text-2xl">
-              Dentist - <span className="text-info">Portal</span>
-            </span>
-          </Link>
-          <p className="text-gray-600 text-center">
+          <LogoName />
+          <p className="text-gray-600 text-center ml-5">
             Your New Smile Starts Here
           </p>
         </div>
@@ -257,9 +183,7 @@ export default function Login() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-gray-600 mt-6">
-          © 2024 Dentist Portal. All rights reserved.
-        </p>
+        <FooterTag />
       </div>
     </div>
   );
