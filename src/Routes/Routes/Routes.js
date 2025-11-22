@@ -11,7 +11,7 @@ import Signup from "../../Pages/Login/Signup";
 import Reviews from "../../Pages/Reviews/Reviews";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DashboardLayout from "../../Layout/DashboardLayout";
-
+import Profile from "../../Pages/ProfilePage/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,14 +52,6 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  // {
-  //   path: "/dashboard",
-  //   element: (
-  //     <PrivateRoute>
-  //       <Dashboard />
-  //     </PrivateRoute>
-  //   ),
-  // },
 
   {
     path: "/dashboard",
@@ -76,6 +68,14 @@ const router = createBrowserRouter([
       {
         path: "appointments",
         element: <h2>Appointments</h2>,
+      },
+      {
+        path: "my-appointments",
+        element: <h2>My Appointments</h2>,
+      },
+      {
+        path: "records",
+        element: <h2>Medical Records</h2>,
       },
       {
         path: "patients",
@@ -99,7 +99,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <h2>Profile page</h2>,
+        element: <Profile />,
       },
       {
         path: "settings",

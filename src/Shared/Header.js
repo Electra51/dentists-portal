@@ -7,13 +7,25 @@ import React, {
 } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider";
-import { LogIn, X, Menu } from "lucide-react";
+import {
+  LogIn,
+  X,
+  Menu,
+  LayoutDashboard,
+  UserIcon,
+  LogOut,
+} from "lucide-react";
 import PrimaryButton from "../Components/PrimaryButton";
 import LogoName from "../Components/LogoName";
 import { logout } from "../redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const NavItems = React.memo(({ user, pathname, handleLogOut }) => {
+import defaultProfileImage from "../assets/images/profile.png";
+
+const NavItems = React.memo(({ user, pathname, handleLogOut, token }) => {
+  const [open, setOpen] = useState(false);
+  const profileImage =
+    user?.photoURL || user?.profileImage || defaultProfileImage;
   return (
     <>
       <Link
@@ -40,20 +52,45 @@ const NavItems = React.memo(({ user, pathname, handleLogOut }) => {
         About
       </Link>
 
-      {user?.uid ? (
-        <>
-          <Link
-            to="/dashboard"
-            className={`nav-link relative pb-1 group ${
-              pathname === "/dashboard" ? "active-nav" : ""
-            }`}>
-            Dashboard
-          </Link>
+      {user?.uid || token ? (
+        <div className="relative">
+          <img
+            src={profileImage}
+            alt="avatar"
+            onClick={() => setOpen(!open)}
+            className="w-8 h-8 rounded-full cursor-pointer border-2 border-blue-100 object-cover"
+          />
 
-          <button onClick={handleLogOut} className="nav-link">
-            Sign out
-          </button>
-        </>
+          {open && (
+            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md py-2 z-50">
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50"
+                onClick={() => setOpen(false)}>
+                <LayoutDashboard size={18} />
+                Dashboard
+              </Link>
+
+              <Link
+                to="/profile"
+                className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50"
+                onClick={() => setOpen(false)}>
+                <UserIcon size={18} />
+                Profile
+              </Link>
+
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  handleLogOut();
+                }}
+                className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 w-full text-left">
+                <LogOut size={18} />
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       ) : (
         <Link to="/login" className="w-full lg:w-auto">
           <PrimaryButton>
@@ -69,6 +106,7 @@ const NavItems = React.memo(({ user, pathname, handleLogOut }) => {
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const location = useLocation();
+  const token = localStorage.getItem("token");
 
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -106,9 +144,10 @@ const Header = () => {
         user={user}
         pathname={location.pathname}
         handleLogOut={handleLogOut}
+        token={token}
       />
     ),
-    [user, location.pathname, handleLogOut]
+    [user, location.pathname, token, handleLogOut]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { Check, Award, Shield, Bell, Activity, BarChart3 } from "lucide-react";
+import { Check, Award, Shield, Activity, BarChart3 } from "lucide-react";
 import fluoride from "../assets/images/fluoride.png";
 import cavity from "../assets/images/cavity.png";
 import whitening from "../assets/images/whitening.png";
@@ -175,13 +175,12 @@ export const dentistMenuItems = [
 ];
 
 export const patientMenuItems = [
-  { path: "/patient/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { path: "/patient/appointments", label: "My Appointments", icon: Calendar },
-  { path: "/patient/records", label: "Medical Records", icon: FolderOpen },
-  { path: "/patient/prescriptions", label: "Prescriptions", icon: FileText },
-  { path: "/patient/payments", label: "Payments & Bills", icon: CreditCard },
-  { path: "/patient/notifications", label: "Notifications", icon: Bell },
-  { path: "/patient/profile", label: "My Profile", icon: UserCircle },
+  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { path: "my-appointments", label: "My Appointments", icon: Calendar },
+  { path: "records", label: "Medical Records", icon: FolderOpen },
+  { path: "prescriptions", label: "Prescriptions", icon: FileText },
+  { path: "payments", label: "Payments & Bills", icon: CreditCard },
+  { path: "profile", label: "My Profile", icon: UserCircle },
 ];
 
 export const adminMenuItems = [

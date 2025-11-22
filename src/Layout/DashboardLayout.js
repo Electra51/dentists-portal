@@ -11,7 +11,7 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar role={decoded.role} />
-      <main className="flex-1 p-6">
+      <main className="flex-1">
         <Outlet />
       </main>
     </div>

@@ -34,9 +34,9 @@ const Sidebar = ({ role }) => {
     switch (role) {
       case ROLES.PATIENT:
         return {
-          active: "bg-green-50 text-green-600",
-          hover: "hover:bg-green-50",
-          iconActive: "text-green-600",
+          active: "bg-blue-50 text-[#42c4c0]",
+          hover: "hover:bg-blue-50",
+          iconActive: "text-[#42c4c0]",
         };
       case ROLES.ADMIN:
         return {
