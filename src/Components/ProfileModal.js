@@ -90,7 +90,7 @@ const ProfileModal = ({
               <button
                 type="button"
                 onClick={handleUploadClick}
-                className="text-teal-600 hover:text-teal-700 font-medium">
+                className="text-[#5ecdc9] hover:text-teal-700 font-medium">
                 Upload Photo
               </button>
               <p className="text-xs text-gray-500 mt-1">JPG, PNG (Max 2MB)</p>
@@ -258,14 +258,14 @@ const ProfileModal = ({
           <div className="flex gap-3 mt-6">
             <button
               onClick={() => setIsEditModalOpen(false)}
-              className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors">
+              className="flex-1 px-4 py-2 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors">
               Cancel
             </button>
 
             <button
               onClick={() => handleSaveProfile(selectedImage)}
               disabled={isUpdating}
-              className="flex-1 px-4 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              className="flex-1 px-4 py-2 bg-gradient-to-r from-secondary to-info text-white hover:opacity-90 rounded-lg hover:bg-cyan-600 font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
               {isUpdating ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
