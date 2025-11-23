@@ -184,12 +184,13 @@ export const patientMenuItems = [
 ];
 
 export const adminMenuItems = [
-  { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { path: "/admin/dentists", label: "Manage Dentists", icon: Users },
-  { path: "/admin/patients", label: "Manage Patients", icon: Activity },
-  { path: "/admin/appointments", label: "All Appointments", icon: Calendar },
-  { path: "/admin/payments", label: "Revenue & Payments", icon: BarChart3 },
-  { path: "/admin/reports", label: "Reports", icon: FileText },
-  { path: "/admin/reviews", label: "Reviews & Feedback", icon: Star },
-  { path: "/admin/settings", label: "System Settings", icon: Settings },
+  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { path: "dentists", label: "Manage Dentists", icon: Users },
+  { path: "patients", label: "Manage Patients", icon: Activity },
+  { path: "appointments", label: "All Appointments", icon: Calendar },
+  { path: "payments", label: "Revenue", icon: BarChart3 },
+  { path: "reports", label: "Reports", icon: FileText },
+  { path: "reviews", label: "Reviews & Feedback", icon: Star },
+  { path: "settings", label: "System Settings", icon: Settings },
+  { path: "profile", label: "My Profile", icon: UserCircle },
 ];

@@ -21,11 +21,13 @@ import { logout } from "../redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import defaultProfileImage from "../assets/images/profile.png";
+import { useGetUserProfileQuery } from "../redux/api/authApi";
 
 const NavItems = React.memo(({ user, pathname, handleLogOut, token }) => {
+  const { data: profileData } = useGetUserProfileQuery();
   const [open, setOpen] = useState(false);
   const profileImage =
-    user?.photoURL || user?.profileImage || defaultProfileImage;
+    user?.photoURL || profileData?.user?.profileImage || defaultProfileImage;
   return (
     <>
       <Link
@@ -35,7 +37,13 @@ const NavItems = React.memo(({ user, pathname, handleLogOut, token }) => {
         }`}>
         Home
       </Link>
-
+      <Link
+        to="/doctors"
+        className={`nav-link relative pb-1 group ${
+          pathname === "/doctors" ? "active-nav" : ""
+        }`}>
+        Dentists
+      </Link>
       <Link
         to="/appointment"
         className={`nav-link relative pb-1 group ${
@@ -58,7 +66,7 @@ const NavItems = React.memo(({ user, pathname, handleLogOut, token }) => {
             src={profileImage}
             alt="avatar"
             onClick={() => setOpen(!open)}
-            className="w-8 h-8 rounded-full cursor-pointer border-2 border-blue-100 object-cover"
+            className="w-9 h-9 rounded-full cursor-pointer border-2 border-blue-100 object-cover"
           />
 
           {open && (

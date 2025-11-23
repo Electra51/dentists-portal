@@ -23,7 +23,10 @@ const AvailableAppointment = ({ selectedDate }) => {
           <Calendar className="w-4 h-4" />
           <span className="">Available Appointments</span>
         </div>
-
+        {/* <p className="inline-flex items-center gap-2 px-4 py-1 bg-primary/10 text-primary text-[12px] font-bold rounded-full uppercase">
+          <Calendar className="w-[15px]" />{" "}
+          <span className="pb-0 mt-0.5">Available Appointments</span>
+        </p> */}
         <h2 className="text-4xl md:text-[43px] font-bold text-accent mb-1.5">
           Available Appointments on{" "}
           <span className=" text-green-600">

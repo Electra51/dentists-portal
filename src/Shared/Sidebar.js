@@ -40,9 +40,9 @@ const Sidebar = ({ role }) => {
         };
       case ROLES.ADMIN:
         return {
-          active: "bg-purple-50 text-purple-600",
+          active: "bg-blue-50 text-[#42c4c0]",
           hover: "hover:bg-purple-50",
-          iconActive: "text-purple-600",
+          iconActive: "text-[#42c4c0]",
         };
       case ROLES.DENTIST:
       default:

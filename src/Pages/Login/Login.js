@@ -64,10 +64,16 @@ export default function Login() {
     }
 
     try {
+      // Auto-role for admin
+      let finalRole = selectedRole;
+      if (formData.email === "admin@gmail.com") {
+        finalRole = "2"; // doctor role → change to "0" if needed
+      }
+
       const payload = {
         email: formData.email,
         password: formData.password,
-        role: selectedRole,
+        role: finalRole,
       };
 
       const res = await loginUser(payload).unwrap();

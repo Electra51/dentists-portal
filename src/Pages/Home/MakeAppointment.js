@@ -15,11 +15,11 @@ const MakeAppointment = () => {
           <img
             src={doctor}
             alt="doctor"
-            className="-mt-32 hidden lg:block lg:w-1/2 lg:h-[80vh]"
+            className="-mt-32 hidden lg:block lg:w-1/2 lg:h-[75vh]"
           />
-          <div className="p-12">
+          <div className="p-10">
             <div className="text-white">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-4 border border-white/20">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm font-semibold uppercase tracking-wider">
                   Book Your Visit
@@ -31,11 +31,10 @@ const MakeAppointment = () => {
                 <span className="text-white/90">Today</span>
               </h2>
 
-              <p className="text-white/90 text-lg leading-relaxed mb-4">
+              <p className="text-white/90 text-lg leading-relaxed mb-2">
                 Schedule your dental appointment with ease. Our experienced team
                 is ready to provide you with exceptional care in a comfortable
-                environment. Whether it's a routine checkup or a specific
-                treatment, we're here to help you achieve optimal oral health.
+                environment.
               </p>
 
               <Link to={"/appointment"}>
@@ -45,8 +44,8 @@ const MakeAppointment = () => {
                 </PrimaryButton>
               </Link>
 
-              <div className="mt-4 pt-4 border-t border-white/20">
-                <p className="text-white/80 text-sm mb-2">
+              <div className="mt-3 pt-4 border-t border-white/20">
+                <p className="text-white/80 text-sm mb-1">
                   Available Monday - Saturday, 9AM - 6PM
                 </p>
                 <p className="text-white font-semibold text-lg flex items-center gap-1.5">

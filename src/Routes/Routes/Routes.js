@@ -12,6 +12,7 @@ import Reviews from "../../Pages/Reviews/Reviews";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Profile from "../../Pages/ProfilePage/Profile";
+import DoctorList from "../../Pages/DoctorList/DoctorList";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/doctors",
+        element: <DoctorList />,
       },
       {
         path: "/about",
@@ -81,6 +86,11 @@ const router = createBrowserRouter([
         path: "patients",
         element: <h2>patients</h2>,
       },
+
+      {
+        path: "dentists",
+        element: <h2>Manage Dentists</h2>,
+      },
       {
         path: "prescriptions",
         element: <h2>prescriptions page</h2>,
@@ -92,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: "reviews",
         element: <h2>reviews page</h2>,
+      },
+      {
+        path: "reports",
+        element: <h2>Reports</h2>,
       },
       {
         path: "payments",
